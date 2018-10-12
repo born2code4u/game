@@ -1,0 +1,165 @@
+{% load otree %}
+{% load staticfiles %}
+<script src="{% static "selfre_GetOrders/highcharts.js" %}"></script>
+<script src="{% static "selfre_GetOrders/series-label.js" %}"></script>
+<script src="{% static "selfre_GetOrders/exporting.js" %}"></script>
+
+{% for rkey,data in Printorders.items %}
+
+<p>
+<div id="chartcontainer{{rkey}}"></div>
+</p><br/>
+
+<script type="text/javascript">
+
+
+Highcharts.chart('chartcontainer{{rkey}}', {
+    xAxis: {
+                title: {
+                        text: 'Trading Rounds'
+                       },
+        min: -0.5,
+        max: 7.5 
+    },
+    yAxis: {
+                title: {
+                        text: 'Base Price P'
+                       },
+        min: 0
+    },
+    title: {
+        text: ' {{rkey}}'
+    },
+    tooltip: {
+        formatter: function () {
+            return '<b>' + this.series.name + '</b><br/>' +
+                'Round:'+this.x + '<br/>P= ' + this.y;
+        }
+    },
+    series: [{
+        type: 'line',
+        name: 'Benchmark',
+        data: [[0,{{data.Benchmark}}],[6,{{data.Benchmark}}]],
+        marker: {
+            radius : 0
+        },
+        states: {
+            hover: {
+                lineWidth:3
+           }
+        },
+        enableMouseTracking: false
+    },{
+        type: 'line',
+        name: 'Average ( {{data.Average}} )',
+        data: [[0,{{data.Average}}],[6,{{data.Average}}]],
+        marker: {
+            radius:0 
+        },
+        states: {
+            hover: {
+                lineWidth: 3 
+            }
+        },
+        enableMouseTracking: false
+    }, {
+        type: 'scatter',
+        name: 'Deals',
+        data: {{data.Deals}},
+        marker: {
+            radius: 4
+        }
+    }, {
+        type: 'scatter',
+        name: 'Offer',
+        data: {{data.Offers}},
+        marker: {
+            radius:4 
+        }
+    }, {
+        type: 'scatter',
+        name: 'Bids',
+        data: {{data.Bids}},
+        marker: {
+            radius: 4 
+        }}]
+});
+
+</script>
+{% endfor %}
+
+<p>
+<div id="linescontainer"></div>
+</p><br/>
+
+<script>
+Highcharts.chart('linescontainer', {
+    xAxis: {
+                title: {
+                        text: 'Position'
+                       },
+        min: -0.5,
+        max: 20.5 ,
+        gridLineWidth:1
+    },
+    yAxis: {
+                title: {
+                        text: ''
+                       },
+        min: 0,
+	max: 1.5
+    },
+    title: {
+        text: ' '
+    },legend: { enabled: false }
+    ,
+    series: [
+{% for line in lines %}
+{
+        type: 'line',
+        data: [[{{line.0}},0],[{{line.1}},1]],
+        marker: {
+            radius : 0
+        },
+        states: {
+            hover: {
+                lineWidth:2
+           }
+        },
+        enableMouseTracking: false
+    },
+{% endfor %}
+{
+        type: 'line',
+        name: 'Production',
+        data: [[0,0],[20,0]],
+        marker: {
+            radius : 0
+        },
+        states: {
+            hover: {
+                lineWidth:5
+           }
+        },
+        enableMouseTracking: false
+    },
+{
+        type: 'line',
+        name: 'Consumption',
+        data: [[0,1],[20,1]],
+        marker: {
+            radius : 0
+        },
+        states: {
+            hover: {
+                lineWidth:5
+           }
+        },
+        enableMouseTracking: false
+    },
+
+
+]
+});
+
+</script>

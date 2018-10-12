@@ -1,0 +1,54 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% block content %}
+{% csrf_token %}
+
+<div class="bringleft">
+Your Player ID: {{player.name}}<br/>
+{{player.description}}
+</div>
+<div align="right">Round {{ player.subsession.session.vars.TRound }}/6 <br/>
+for week No. {{ player.subsession_id }}<br/>
+Benchmark price {{ player.subsession.session.vars.selfremarket.selfremarket.pbench }}
+</div>
+{{ ordertaker_formset.management_form }}
+<p>
+<h1> Trading Round No. {{ player.subsession.session.vars.TRound }}</h1>
+<p>
+{% for f in ordertaker_formset %}
+        <div style="padding:20px; float:left;">
+        <table>
+        <tr class="cleanrow"><th colspan=5 /></tr>
+        <tr><th colspan=5 style="text-align:center">Orderbook for {{f.region.name}}</th></tr>
+        <tr><th colspan=5 style="text-align:center">Min={{ f.region.min }}, Center={{ f.region.center }}, Max={{ f.region.max }}</th></tr>
+        <tr></tr>
+        <tbody>
+        <tr><td>Vol</td><td>new Bid</td><td/><td style="text-align:right">new Offer</td><td style="text-align:right">Vol</td></tr>
+        <tr><td>{{f.bidvol}}</td><td>{{f.bid}}</td><td/><td style="text-algin:right">{{f.offer}}</td><td>{{f.offervol}}</td></tr>
+        <tr></tr>
+        <tr><th colspan=2>Bids</th><th/><th colspan=2 style="text-align:right;">Offers</th></tr>
+        <tr class="emptyrow"><td colspan=2/><td colspan=1/><td colspan=2/></tr>
+                {% for value in f.book %}
+                <tr><td colspan=2>{{ value.0.0 }}{{value.0.1}}</td><td/><td colspan=2 style="text-align:right">{{ value.1.0 }}{{value.1.1}}</td></tr>
+                {% endfor %}
+        <tr><td colspan=5><b>Your Net Position:{{ f.NetDeals }}</b></td></tr>
+        <tr><th colspan=5 style="text-align:right"><small><i>*your orders</i></small></th></tr>
+        </tbody>
+        <tfoot>
+        <tr></tr>
+        <tr><th colspan=5><small><b>Overview of Trades</b></small></th></tr>
+        <tr><td colspan=5><small>in last round:{% for value in f.lasttrades %} {{value.0}} {% endfor %}</small></td></tr>
+        <tr><td colspan=5><small>in all rounds:{% for value in f.alltrades %} {{value.0}} {% endfor %}</small></td></tr>
+        <tr><td colspan=5><small>Your Purchases:{% for value in f.Mypurch %} {{value.0}} {% endfor %}</small></td></tr>
+        <tr><td colspan=5><small>Your Sales:{% for value in f.Mysales %} {{value.0}} {% endfor %}</small></td></tr>
+        </tfoot>
+        </table>
+        </div>
+{% endfor %}
+</p>
+</p>
+<p><br/>
+<div style="clear: both"></div>
+<button class="btn btn-danger">Done</button>
+</p>
+{% endblock %}

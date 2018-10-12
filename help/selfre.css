@@ -1,0 +1,17 @@
+<style type="text/css">
+table {
+    display: inline-block; 
+    vertical-align: top;
+    border: 1px solid black;
+}
+td,th {
+     border: 1px solid black;
+}
+
+.bringleft {
+float : left
+}
+
+body {background-color: #ccff00;}
+button {color: red;}
+</style>

@@ -1,0 +1,43 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% block content %}
+<div>
+Your Player ID: {{player.name}}
+</div>
+<p>
+<h1>Result</h1>
+<p>
+<h2>Personal Profits</h2>
+{% for key, profit in pnl.items %}
+for Player {{key}} : {{profit}} in money units <br/>
+{% endfor %}
+</p>
+<h2>Group Freight: {{F}} in distance units </h2>
+<h2>Minimal Possible Freight: {{Fopt}}</h2>
+</p>
+<h1>Deals & Orders:</h1>
+<br/>
+{% include 'selfre_GetOrders/chart.html' %}
+<p><br/>
+</p>
+</p>
+<br/><br/><br/>
+<small><b>
+<p>Credits</p>
+<p>This game got supported by <br/>
+<ul>
+<li>FABBS - Federal Association in Behavioural and Brain Science, Washington/USA</li>
+<li>UCSC Economics - University Santa Cruz</li>
+</ul>
+</p>
+<p>The Game Model and Software is originally described in <br/>
+<ul>
+<li>"oTree - An open-source platform for laboratory, online, and field experiments."
+Journal of Behavioral and Experimental Finance, vol 9: 88-97, 2016 (Chen, Daniel L., Martin Schonger, and Chris Wickens)</li>
+<li>
+"Model for selfregulating, spacially extended market place for commodity trading", MPRA Preprint Server, 79482, 2017 (Michaelis, B.)
+</li>
+</ul>
+</p>
+</small></b>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "global/Page.html" %}
+
+{% load staticfiles otree %}
+{% block title %}
+Questions Page
+{% endblock %}
+
+{% block content %}
+<h1> screen for player {{ player.participant.vars.name }}</h1>
+<a href="https://www.w3schools.com">green link</a>
+
+{% if 'foolish' == 'foolish' %}<p>aha</p>{% endif %}
+
+<table>
+<tr><th>Region</th><th>Bid-Size(0-3)</th><th>Bid</th><th>Offer</th><th>Offer-Size(0-3)</th></tr>
+{% for x in player.session.vars.selfremarket.regions %}
+{% if x.name == 'Region_A' %}<tr><td>{{x.name}}</td><td>{% formfield player.bidRegion_A label=""%}</td><td/><td/><td/></tr>{% endif %}
+{% if x.name == 'Region_B' %}<tr><td>Region B</td><td>{% formfield player.bidRegion_B label=""%}</td><td/><td/><td/></tr>{% endif %}
+{% if x.name == 'Region_C' %}<tr><td>Region C</td><td>{% formfield player.bidRegion_C label=""%}</td><td/><td/><td/></tr>{% endif %}
+{% endfor %}
+</table>
+
+{% next_button %}
+
+{% endblock %}

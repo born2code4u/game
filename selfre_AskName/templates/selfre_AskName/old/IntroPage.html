@@ -1,0 +1,23 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+Selfre Hub Version 1<br/>
+--the selfregulating hub market simulation--
+{% endblock %}
+
+{% block content %}
+<p>Your name:{{ self.player.name }}<br/>
+</p>
+<p>
+Public Infomation on the game (for all players the same text):<br>
+There are X players. 
+Production facilities can produce for price ...
+</p><p>
+Private Information (for each player differently):
+you have the following...<br/>
+</p>
+<button class="btn btn-danger">Ok</button>
+
+{% next_button %}
+{% endblock %}

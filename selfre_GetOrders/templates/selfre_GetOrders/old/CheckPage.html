@@ -1,0 +1,19 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Page title
+{% endblock %}
+
+{% block content %}
+
+<h1> Matching page Round Info </h1>
+<p>Player Name: {{ player.participant.vars.name }}</p>
+<h1>List of All Orders </h1>
+{% for key,value in subsession.session.vars.AllOrders.items %}
+{{key}},{{value.player}},{{value.timestamp}},{{value.type}},{{value.price}},{{value.status}},{{value.filled_against}},{{value.filled_price}},{{value.region}}<br/>
+{% endfor %}
+{% next_button %}
+{% endblock %}
+
+

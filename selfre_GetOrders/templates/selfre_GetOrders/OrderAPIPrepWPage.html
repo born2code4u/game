@@ -1,0 +1,57 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% block title %}
+{% endblock %}
+{% block content %}
+
+<p>
+<h1>1.Public Information:</h1>
+<h2>1.1 General</h2>
+{{player.subsession.session.vars.selfremarket.generaldescription}}<br/>
+Regions are separeted by flexible <b> Boundaries </b>, which may be changed after each session.
+</p>
+<p>Each region is related to a sales contract type. The Buyer of a contract will have to pay P+|X-C|. P is the base price, he negotiated with seller. X is the destination he decides to get the commodity to* and C is called center of the region. X has to be inside the region. The Seller has to either bring the commodity himself or buy it and let someone else bring it.
+</p>
+Thus a consumer should purchase the contract for the region in which he consumes. But a producer can transport to all sites and likely has to be willing to sell his material into all regions.
+<p>
+If players are unballanced after the last negotiation round, they will have to export or import. Price for import is 100 and for export 0 per commodity unit. </p>
+<p>
+Sales and purchases will be evaluated against a <b>Benchmark Price</b>.</p>
+<!-- the following text may be game dependent, because there can be more than 1 boundary... -->
+<h2>1.2 Settings for Next Rounds </h2>
+A/B Boundary: {{player.subsession.session.config.boundary01}}<br/>
+Benchmark Price: {{ player.subsession.session.vars.selfremarket.selfremarket.pbench }}
+</p>
+
+</p>
+<p>
+<h2>2. Private Information (please don`t share):</h2>
+{{player.description}}
+</p>
+<p>
+When you don`t have questions and you are ready, continue to a set of negotiation rounds
+</p>
+
+<button class="btn btn-danger">Start</button>
+<br/><br/><br/>
+
+<small><b>
+<p>Credits</p>
+<p>This game got supported by <br/>
+<ul>
+<li>FABBS - Federal Association in Behavioural and Brain Science, Washington/USA</li>
+<li>UCSC Economics - University Santa Cruz</li>
+</ul>
+</p>
+<p>The Game Model and Software is originally described in <br/>
+<ul>
+<li>"oTree - An open-source platform for laboratory, online, and field experiments."
+Journal of Behavioral and Experimental Finance, vol 9: 88-97, 2016 (Chen, Daniel L., Martin Schonger, and Chris Wickens)</li>
+<li>
+"Model for selfregulating, spacially extended market place for commodity trading", MPRA Preprint Server, 79482, 2017 (Michaelis, B.)
+</li>
+</ul>
+</p>
+<p>
+*like INCO Terms DDP or CIF</p></b></small>
+{% endblock %}

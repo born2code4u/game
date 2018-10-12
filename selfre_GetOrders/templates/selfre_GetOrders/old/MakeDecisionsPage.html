@@ -1,0 +1,14 @@
+{% extends "global/Page.html" %}
+
+{% load staticfiles otree %}
+
+{% block content %}
+
+{{ decision_formset.management_form }}
+<ul>
+{% for val, form in decision_values_and_forms %}
+        <li>Value <b>{{ val }}</b> — {{ form }}</li>
+{% endfor %}
+</ul>
+{% next_button %}
+{% endblock %}

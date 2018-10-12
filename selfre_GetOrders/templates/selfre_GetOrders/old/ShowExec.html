@@ -1,0 +1,21 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+
+{% block title %}
+    Page title
+{% endblock %}
+
+{% block content %}
+
+<h1> Summary of Executed Deals </h1>
+<p>Player Name: {{ player.participant.vars.name }}</p>
+<h1>List of All Orders </h1>
+{% for key,value in subsession.session.vars.AllOrders.items %}
+{% if value.status  == 'exec' %}
+{{key}},{{value.player}},{{value.timestamp}},{{value.type}},{{value.price}},{{value.status}},{{value.filled_against}},{{value.filled_price}},{{value.region}}<br/>
+{% endif %}
+{% endfor %}
+{% next_button %}
+{% endblock %}
+
+

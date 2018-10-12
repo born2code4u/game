@@ -1,0 +1,33 @@
+{% extends "otree/Page.html" %}
+{% load staticfiles otree %}
+
+{% block global_styles  %}
+<style type="text/css">
+table {
+    display: inline-block; 
+    vertical-align: top;
+    border: 1px solid black;
+}
+td,th {
+     border: 1px solid black;
+}
+
+.bringleft {
+float : left
+}
+
+.emptyrow {
+height: 1em
+}
+
+tr.cleanrow {
+border: 0px  
+}
+
+body {background-color: #ccff00;}
+button {color: red;}
+</style>
+{% endblock %}
+{% block global_scripts  %}
+
+{% endblock %}

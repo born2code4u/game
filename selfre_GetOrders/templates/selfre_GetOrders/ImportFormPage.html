@@ -1,0 +1,43 @@
+{% extends "global/Page.html" %}
+{% load staticfiles otree %}
+{% block content %}
+{% csrf_token %}
+<div class="bringleft">
+Your Player ID: {{player.name}}<br/>
+{{player.description}}
+</div>
+<div align="right">
+import/export<br/>
+round for week {{player.subsession_id}} 
+</div>
+<p>
+<br/>
+{% if player.participant.vars.importexport.Nunballanced == 0 %}
+Congratulations - your portfolio is physically ballanced. Please just click ok.
+{% else %}
+    {% if player.participant.vars.importexport.Nunballanced < 0 %}
+    {{ import_formset.management_form }}
+Ups... the last trading round is finished and your portfolio is not ballanced.<br/>
+You are physically short, please select exactly {{ player.participant.vars.importexport.negNunballanced }} items, which will be
+supplied by import*: 
+    {% endif %}
+    {% if player.participant.vars.importexport.Nunballanced > 0 %}
+    {{ import_formset.management_form }}
+Ups... the last trading round is finished and your portfolio is not ballanced.<br/>
+You are physically long, please select exactly {{ player.participant.vars.importexport.Nunballanced }} items, which will be
+exported (or not produced)*: 
+    {% endif %}
+    {% for f in import_formset %}
+        {{f.underlyingDesc}} {{f.yes}}<br/><br/>
+    {% endfor %}
+{% endif %}
+</p>
+<button class="btn btn-danger">ok</button>
+
+<p>
+{% if player.participant.vars.importexport.Nunballanced != 0 %}
+<i>*otherwise arbitrary ones will be chosen.</i>
+{% endif %}
+</p>
+
+{% endblock %}
